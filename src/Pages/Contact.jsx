@@ -7,7 +7,7 @@ const Contact = () => {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    axios.get('http://dikshabackend-env.eba-wxn4iyrj.ap-south-1.elasticbeanstalk.com/api/contact/all')
+    axios.get('https://dikshaenterprisesbackend.onrender.com/api/contact/all')
       .then(res => {
         setContacts(res.data);
         setLoading(false);

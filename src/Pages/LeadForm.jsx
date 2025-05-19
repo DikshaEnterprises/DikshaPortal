@@ -9,7 +9,7 @@ const LeadForm = () => {
   useEffect(() => {
     const fetchLeads = async () => {
       try {
-        const response = await axios.get('http://dikshabackend-env.eba-wxn4iyrj.ap-south-1.elasticbeanstalk.com/api/lead-form/getAllLeads');
+        const response = await axios.get('https://dikshaenterprisesbackend.onrender.com/api/lead-form/getAllLeads');
         setLeads(response.data);
       } catch (err) {
         setError('Failed to fetch leads');

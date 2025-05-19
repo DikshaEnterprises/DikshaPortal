@@ -8,7 +8,7 @@ const ReferralTable = () => {
 
   const fetchReferrals = () => {
     setLoading(true);
-    fetch("http://dikshabackend-env.eba-wxn4iyrj.ap-south-1.elasticbeanstalk.com/api/referrals/all")
+    fetch("https://dikshaenterprisesbackend.onrender.com/api/referrals/all")
       .then((res) => {
         if (!res.ok) throw new Error("Network error");
         return res.json();
@@ -31,7 +31,7 @@ const ReferralTable = () => {
   const handlePay = async (referralId, transactionId) => {
     setPayingTxId(transactionId);
     try {
-      const res = await fetch("http://dikshabackend-env.eba-wxn4iyrj.ap-south-1.elasticbeanstalk.com/api/referrals/update-status", {
+      const res = await fetch("https://dikshaenterprisesbackend.onrender.com/api/referrals/update-status", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ referralId, transactionId }),

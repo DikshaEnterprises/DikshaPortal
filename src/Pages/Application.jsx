@@ -12,7 +12,7 @@ const Application = () => {
   const fetchApplications = async () => {
     try {
       setLoading(true);
-      const res = await axios.get('http://dikshabackend-env.eba-wxn4iyrj.ap-south-1.elasticbeanstalk.com/api/payment/applications');
+      const res = await axios.get('https://dikshaenterprisesbackend.onrender.com/api/payment/applications');
       setApplications(res.data);
     } catch (err) {
       console.error('Error fetching applications', err);
@@ -20,20 +20,6 @@ const Application = () => {
       setLoading(false);
     }
   };
-
-//   const handleStatusChange = async (id, newStatus) => {
-//     try {
-//       setStatusLoadingId(id);
-//       await axios.patch(`http://dikshabackend-env.eba-wxn4iyrj.ap-south-1.elasticbeanstalk.com/api/payment/applications/:${id}/status`, {
-//         applicationStatus: newStatus,
-//       });
-//       await fetchApplications();
-//     } catch (err) {
-//       console.error('Error updating status', err);
-//     } finally {
-//       setStatusLoadingId(null);
-//     }
-//   };
 
   useEffect(() => {
     fetchApplications();
@@ -49,7 +35,7 @@ const Application = () => {
         </div>
       ) : (
         <div className="overflow-auto rounded-lg shadow border">
-          <table className="w-full table-auto text-sm text-left min-w-[1000px]">
+          <table className="w-full table-auto text-sm text-left min-w-[1100px]">
             <thead className="bg-orange-100 text-gray-700 uppercase text-xs">
               <tr>
                 <th className="px-4 py-3">Name</th>
@@ -70,7 +56,7 @@ const Application = () => {
                 <th className="px-4 py-3">Payment ID</th>
                 <th className="px-4 py-3">User ID</th>
                 <th className="px-4 py-3">Status</th>
-                {/* <th className="px-4 py-3">Update</th> */}
+                <th className="px-4 py-3">Photo</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y">
@@ -109,28 +95,23 @@ const Application = () => {
                       {app.applicationStatus}
                     </span>
                   </td>
-                  {/* <td className="px-4 py-2">
-                    <select
-                      value={app.applicationStatus}
-                      onChange={(e) => handleStatusChange(app._id, e.target.value)}
-                      className="border px-2 py-1 rounded text-sm"
-                      disabled={statusLoadingId === app._id}
-                    >
-                      {statusOptions.map((status) => (
-                        <option key={status} value={status}>
-                          {status}
-                        </option>
-                      ))}
-                    </select>
-                    {statusLoadingId === app._id && (
-                      <Loader2 className="inline ml-2 animate-spin h-4 w-4 text-orange-500" />
+                  <td className="px-4 py-2">
+                    {app.photo ? (
+                      <button
+                        onClick={() => window.open(app.photo, '_blank')}
+                        className="bg-orange-500 text-white px-3 py-1 rounded hover:bg-orange-600 transition"
+                      >
+                        View Photo
+                      </button>
+                    ) : (
+                      <span className="text-gray-400 text-xs">No Photo</span>
                     )}
-                  </td> */}
+                  </td>
                 </tr>
               ))}
               {applications.length === 0 && (
                 <tr>
-                  <td colSpan="18" className="text-center p-4 text-gray-500">
+                  <td colSpan="19" className="text-center p-4 text-gray-500">
                     No applications found.
                   </td>
                 </tr>
